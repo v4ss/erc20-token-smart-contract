@@ -22,7 +22,7 @@ contract CustomToken {
     }
 
     function transfer(address to, uint256 value) public returns (bool) {
-        require(to != address(0), "It's impossible to transfer funds to 0 address");
+        require(to != address(0), "It is impossible to transfer funds to 0 address");
         require(balanceOf[msg.sender] >= value, "Insufficient funds");
 
         balanceOf[msg.sender] -= value;
@@ -39,8 +39,8 @@ contract CustomToken {
     }
 
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
-        require(from != address(0), "It's impossible to transfer funds from 0 address");
-        require(to != address(0), "It's impossible to transfer funds to 0 address");
+        require(from != address(0), "It is impossible to transfer funds from 0 address");
+        require(to != address(0), "It is impossible to transfer funds to 0 address");
         require(balanceOf[from] >= value, "Insufficient funds from source address");
         require(allowance[from][msg.sender] >= value, "Insufficient authorization");
 
