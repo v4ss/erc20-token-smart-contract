@@ -2,11 +2,11 @@
 
 pragma solidity >=0.8.2 <0.9.0;
 
-contract CustomToken {
+contract CustomERC20Token {
 
-    string public name = "CustomToken";
-    string public symbol = "CTK";
-    uint8 public decimals = 18;
+    string public name;
+    string public symbol;
+    uint8 public decimals;
     uint256 public totalSupply;
     address public owner;
     mapping(address => uint256) public balanceOf;
@@ -15,7 +15,10 @@ contract CustomToken {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    constructor(uint256 initialSupply) {
+    constructor(string tokenName, string tokenSymbol, uint256 tokenDecimals, uint256 initialSupply) {
+        name = tkenName;
+        symbol = tokenSymbol;
+        decimals = tokenDecimals;
         totalSupply = initialSupply * 10 ** uint256(decimals);
         balanceOf[msg.sender] = totalSupply;
         owner = msg.sender;
