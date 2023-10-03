@@ -15,8 +15,8 @@ contract CustomERC20Token {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    constructor(string tokenName, string tokenSymbol, uint256 tokenDecimals, uint256 initialSupply) {
-        name = tkenName;
+    constructor(string memory tokenName, string memory tokenSymbol, uint8 tokenDecimals, uint256 initialSupply) {
+        name = tokenName;
         symbol = tokenSymbol;
         decimals = tokenDecimals;
         totalSupply = initialSupply * 10 ** uint256(decimals);
