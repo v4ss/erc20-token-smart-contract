@@ -15,43 +15,43 @@ contract CustomERC20Token {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    constructor(string memory tokenName, string memory tokenSymbol, uint8 tokenDecimals, uint256 initialSupply) {
-        name = tokenName;
-        symbol = tokenSymbol;
-        decimals = tokenDecimals;
-        totalSupply = initialSupply * 10 ** uint256(decimals);
+    constructor(string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals, uint256 _initialSupply) {
+        name = _tokenName;
+        symbol = _tokenSymbol;
+        decimals = _tokenDecimals;
+        totalSupply = _initialSupply * 10 ** uint256(decimals);
         balanceOf[msg.sender] = totalSupply;
         owner = msg.sender;
     }
 
-    function transfer(address to, uint256 value) public returns (bool) {
-        require(to != address(0), "It is impossible to transfer funds to 0 address");
-        require(balanceOf[msg.sender] >= value, "Insufficient funds");
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        require(_to != address(0), "It is impossible to transfer funds to 0 address");
+        require(balanceOf[msg.sender] >= _value, "Insufficient funds");
 
-        balanceOf[msg.sender] -= value;
-        balanceOf[to] += value;
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
 
-        emit Transfer(msg.sender, to, value);
+        emit Transfer(msg.sender, _to, _value);
         return true;
     }
 
-    function approval(address spender, uint256 value) public returns (bool) {
-        allowance[msg.sender][spender] = value;
-        emit Approval(msg.sender, spender, value);
+    function approval(address _spender, uint256 _value) public returns (bool) {
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
-    function transferFrom(address from, address to, uint256 value) public returns (bool) {
-        require(from != address(0), "It is impossible to transfer funds from 0 address");
-        require(to != address(0), "It is impossible to transfer funds to 0 address");
-        require(balanceOf[from] >= value, "Insufficient funds from source address");
-        require(allowance[from][msg.sender] >= value, "Insufficient authorization");
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
+        require(_from != address(0), "It is impossible to transfer funds from 0 address");
+        require(_to != address(0), "It is impossible to transfer funds to 0 address");
+        require(balanceOf[_from] >= _value, "Insufficient funds from source address");
+        require(allowance[_from][msg.sender] >= _value, "Insufficient authorization");
 
-        balanceOf[from] -= value;
-        balanceOf[to] += value;
-        allowance[from][msg.sender] -= value;
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        allowance[_from][msg.sender] -= _value;
 
-        emit Transfer(from, to, value);
+        emit Transfer(_from, _to, _value);
         return true;
     }
 }
